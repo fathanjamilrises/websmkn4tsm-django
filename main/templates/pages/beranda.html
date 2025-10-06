@@ -1,0 +1,154 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Beranda - SMKN 4Tasikmalaya{%endblock %} 
+
+{% block content %}
+<!-- Carousel Section -->
+<section class="container-fluid">
+  <div id="carouselExampleCaptions" class="carousel slide carousel-fade">
+    <div class="carousel-indicators">
+      {% for item in berita_terbaru %}
+      <button
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide-to="{{ forloop.counter0 }}"
+        {% if forloop.first %}class="active" aria-current="true"{% endif %}
+        aria-label="Slide {{ forloop.counter }}"
+      ></button>
+      {% endfor %}
+    </div>
+
+    <div class="carousel-inner rounded-4">
+      {% for item in berita_terbaru %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <img
+          src="{{ item.image_url }}"
+          class="d-block w-100"
+          alt="{{ item.title }}"
+          style="object-fit: cover; max-height: 500px;"
+        />
+        <div class="carousel-caption d-block small text-start my-2  p-3">
+          <h5 class="fw-bold">{{ item.title }}</h5>
+          <p class="mb-2 text-light">{{ item.content|truncatewords:20 }}</p>
+          <a href="{% url 'berita_detail' item.id %}" class="btn btn-blue btn-sm">Selengkapnya</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</section>
+
+
+<!-- Information Section -->
+<section class="container py-5" style="margin-top: 30px">
+  <div class="row align-items-center">
+    <!-- Gambar -->
+    <div class="col-md-6">
+      <img
+        src="https://smkn4tsm.netlify.app/assets/img1.JPG"
+        class="img-fluid rounded-4 shadow-sm mb-5 md:mb-0"
+        alt="Siswa SMKN 4 Tasikmalaya"
+      />
+    </div>
+
+    <!-- Deskripsi -->
+    <div class="col-md-6">
+      <h3 class="fw-bold mb-3">SMK Negeri 4 Tasikmalaya</h3>
+      <p class="text-muted mb-4">
+        SMK Negeri 4 Tasikmalaya menghasilkan tamatan yang Cerdas, Akhlak mulia,
+        Kreatif, Aktif, Produktif, dengan berlandaskan Iman dan Taqwa
+        <strong>(CAKAP BERIMTAQ)</strong>.
+      </p>
+
+      <!-- Statistik -->
+      <div class="row text-center">
+        <div class="col-4">
+          <h4 class="fw-bold text-blue">{{ statistik.siswa_aktif }} +</h4>
+          <p class="text-muted small mb-0">Siswa Aktif</p>
+        </div>
+        <div class="col-4">
+          <h4 class="fw-bold  text-blue">{{ statistik.guru_profesional }} +</h4>
+          <p class="text-muted small mb-0">Guru Profesional</p>
+        </div>
+        <div class="col-4">
+          <h4 class="fw-bold  text-blue">{{ statistik.program_keahlian }}</h4>
+          <p class="text-muted small mb-0">Program Keahlian</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Keunggulan Section -->
+<section class="container-fluid px-0 py-5" style="margin-top:30px ;">
+  <div class="row g-0">
+    <!-- Kiri -->
+    <div
+      class="col-md-6 bg-blue text-white d-flex flex-column justify-content-center px-5 py-5"
+    >
+      <h2 class=" mb-5 fs-2 text-start" style="margin-bottom: 20px;">
+        Kenapa Memilih <span class="fw-bold">Kami</span>
+      </h2>
+
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        {%  for item in kelebihan %}
+        <div class="col d-flex align-items-center">
+          <i class="{{ item.icon }} fs-1 me-3"></i>
+          <div>
+            <h6 class="fw-semibold mb-1">{{ item.title }}</h6>
+            <p class="mb-0 small opacity-75">
+                {{ item.description }}
+            </p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Kanan -->
+    <div class="col-md-6 d-lg-block d-none">
+      <img
+        src="https://smkn4tasikmalaya.netlify.app/assets/image/berita5.jpg"
+        alt="Kenapa Memilih Kami"
+        class="img-fluid w-100 h-100 object-fit-cover"
+      />
+    </div>
+  </div>
+</section>
+
+<!-- Section Jurusan -->
+ <section class="container py-5" style="margin-top: 30px">
+  <div class="text-center mb-5">
+    <h2 class="">Kompetensi <span class=" fw-bold">Keahlian</span></h2>
+  </div>
+
+  <div class="row g-4 justify-content-center">
+    {%  for item in jurusan %}
+    <div class="col-lg-4 mb-4">
+      <div class="card shadow-sm border-0 h-100 text-center px-4 py-2">
+        <img src="{{ item.image_url }}" alt="TJKT" class="mx-auto mb-3" width="80">
+        <h5 class="fw-semibold">{{ item.title }}</h5>
+        <p class="text-muted small">
+            {{ item.description|truncatewords:15 }}
+        </p>
+        <div class="my-3 d-flex justify-content-center">
+            <a href="{% url 'jurusan_detail' item.id %}" class="btn btn-blue btn-sm">Selengkapnya</a>
+        </div>
+        
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+
+{% endblock %}

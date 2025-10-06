@@ -1,0 +1,49 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Galeri - SMKN 4 Tasikmalaya{% endblock %}
+
+{% block content %}
+<!-- Header -->
+<section
+  class="header-profil text-center text-white d-flex align-items-center justify-content-center"
+>
+  <div class="overlay"></div>
+  <div class="position-relative">
+    <h2 class="fw-bold mb-3">Galeri</h2>
+    <p class="fs-6 small">Lorem ipsum dolor sit amet.</p>
+  </div>
+</section>
+
+<!-- Section Galeri -->
+<section class="container py-5">
+  <div class="row g-3">
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="card border-0 shadow-sm">
+        <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Kegiatan 6">
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="card border-0 shadow-sm">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Kegiatan 7">
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="card border-0 shadow-sm">
+        <img src="https://images.unsplash.com/photo-1573495627361-d9b87960b12d?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Kegiatan 8">
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.card img {
+  height: 180px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
+</style>
+{% endblock %}
